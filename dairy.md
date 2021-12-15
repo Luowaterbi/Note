@@ -11,3 +11,6 @@
 
 ## 2021.12.14
 1. 注意nn.Module一定要初始化，init和forward完全是两套参数
+
+## 2021.12.15
+1. cdf是概率分布函数P(x<=input)，pdf是概率密度函数P(x=input)。pdf是cdf的导数，cdf是pdf的积分。
