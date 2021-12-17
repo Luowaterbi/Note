@@ -14,3 +14,10 @@
 
 ## 2021.12.15
 1. cdf是概率分布函数P(x<=input)，pdf是概率密度函数P(x=input)。pdf是cdf的导数，cdf是pdf的积分。
+
+## 2021.12.16
+1. torch.nn.Softmax() 默认dim=0
+2. vscode mac 代码格式化快捷键 option+shift+F
+
+## 2021.12.17
+1. $a[1,1,1] = a[1][1][1], a[[1,1,1]] = [a[1],a[1],a[1]]$
