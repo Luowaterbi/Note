@@ -192,3 +192,94 @@ dim=-1, output:3x4.
 1. Tensor.size是function，size(0),size(1)...
    Tensor.shape是attribute，shape=[size(0),size[1]...]
 2. 大量输出中间变量的时候，tensor.tolist()之后，round()一下，要不然小数太多
+
+## 2022.1.3
+1. torch.einsum不用那么规整，自己看着舒服就好了,自动permute
+   ~~~python
+   torch.einsum("bnm,bnd->bmd",a,b)=torch.einsum("bmn,bnd->bmd",a.permute(0,2,1),b)
+   ~~~
+2. bash的if...else...
+   ~~~bash
+   if [condition];then
+    commands;
+   elif [condition];then
+    commands;
+   else 
+    commands;
+   fi
+   ~~~
+3. bash不能传"()",识别成新建shell了，但传过去的没有"()"，也是可以当lst用
+   ~~~bash
+   source test.sh (MNSOL) # MNSOL得不到
+   source test.sh MNSOL # MNSOL正常收到
+   # in test.sh
+   a=$1
+   for i in ${a[@]};do
+      echo a
+   done
+   # 这样是可行的，即便是传进来的不是list
+   ~~~
+4. bash传参数，被调用的文件用 $1,$2 即可获取
+5. 在语句后加“&”，代表着并行，不等这句话结束，直接继续执行，还有一个nohup，以后用到了再细讲
+
+## 2022.1.4
+1. 检测model有没有正常运行，可以看看parameters有没有grad
+2. gpu上的tensor不要直接cpu，会导致grad断了。但是像list(tesnor(...),tensor(...),...)这种，虽然list在cpu上，但是里面的tesnor还在gpu里，不会断
+3. 像list这种在cpu上，之后运算的会报错不在一个device上，如果list元素比较少，直接拆成一个一个tesnor得了。
+
+## 2022.1.5
+1. writer.wirte()只能write str，想输出list可以直接 str(list)，可以把list str
+   
+## 2022.1.10
+1. bash不会自动计算式子，输入直接输入具体数字
+2. code-runner setting.json为了让在任何文件夹的C文件编译文件都留在build文件夹，可以用
+   >$workspaceRoot: The path of the folder opened in VS Code
+   ~~~json
+   "code-runner.executorMap": {
+        "c": "gcc $fileName -o $workspaceRoot/build/$fileNameWithoutExt && $workspaceRoot/build/$fileNameWithoutExt",
+        "cpp": "clang++ -std=c++17 $fileName -o $workspaceRoot/build/$fileNameWithoutExt && $workspaceRoot/build/$fileNameWithoutExt",
+        "python": "/Users/s1mple/miniconda3/envs/pytorch/bin/python"
+    },
+   ~~~
+
+## 2022.1.13
+1. bash tutorial
+   ~~~bash
+   # $(command) 得到command语句的输出，括号里是命令 
+   echo $(whoami) # username
+   # read variable 读入variable，注意没有$符号，直接接变量名就行
+   read name
+   echo $name
+   # grep [option] pattern file 文本搜索工具,输出对应的一行
+   ifconfig ｜ grep broadcast # inet 192.168.31.47 netmask 0xffffff00 broadcast 192.168.31.255 
+   # awk '{pattern + action}' {filenames} 样式扫描和处理语言
+   ifconfig | grep broadcast | awk '{print $2}' # 192.168.31.47
+   awk '{if(NR>=20 && NR<=30) print $1}' test.txt  # 查看test.txt第20-30行的内容
+   # {}内的就是awk这种语言的语法
+   # alias 快捷命令
+   alias myip="ifconfig | grep broadcast | awk '{print $2}' " # inet 192.168.31.47 netmask 0xffffff00 broadcast 192.168.31.255
+   # 并不对,注意不要忘了“”
+   alias myip="echo $(ifconfig | grep broadcast | awk '{print $2}')" # 192.168.31.47
+   ~~~
+   bash符号两边注意不要乱加空格
+
+## 2022.1.14
+1. my alias
+   ~~~bash
+   alias gpu="scir-status"
+   alias details="scir-account details"
+   alias sq="squeue -u xzluo"
+   alias mycancel="scancel -u xzluo"
+   # 删除快捷命令
+   unalias
+   # 传参直接写就行
+   alias squeue="squeue -u $1"
+   ~~~
+2. 快捷键
+   1. ctrl+c 强制终止当前命令
+   2. ctrl+l 清屏
+   3. ctrl+a 光标移动到行首
+   4. ctrl+e 光标移动到行尾
+   5. ctrl+u 从光标删除到行首
+   6. ctrl+z 命令放入后台
+   7. ctrl+r 在历史命令中搜索
