@@ -283,3 +283,36 @@ dim=-1, output:3x4.
    5. ctrl+u 从光标删除到行首
    6. ctrl+z 命令放入后台
    7. ctrl+r 在历史命令中搜索
+
+## 2022.1.16
+1. alias每次重启都会重置，就是上一次输的会失效
+   存到 .bashrc里了，source ./.bashrc一下
+
+## 2022.1.20
+1. bash一些可以替换if的操作
+   ~~~bash
+   command && command # 前面执行成功，执行后面的
+   command || command # 前面执行失败，执行后面的
+   command || command || command # 每一个只对前面负责
+   ~~~
+
+## 2022.1.22
+1. bash不能传递数组
+2. bash =号两边不要有空格
+
+## 2022.1.29
+1. markdown图片路径必须是"./XXX"，如果是“/XXX”，markdown预加载是没有问题的，但是导出的pdf会加载不出来（可能只是vscode-markdown-pdf的问题）
+2. markdown/css实现图片居中，大小缩放
+   ```markdown
+   <div align=center><img src="" style="zoom:30%" /></div>
+   ```
+
+## 2022.2.09
+1. markdown换行是行末两个空格(不用写\<br>了)
+2. 图的2-hop path意思是长度为2的路径
+3. 公式换行用\\\
+   $$change \\ line $$
+
+### 2022.2.10
+1. **共享权重**在**数据集较小**的情况下可以**防止过拟合**
+2. w/o = without
