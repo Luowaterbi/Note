@@ -316,3 +316,35 @@ dim=-1, output:3x4.
 ### 2022.2.10
 1. **共享权重**在**数据集较小**的情况下可以**防止过拟合**
 2. w/o = without
+
+### 2022.2.11
+1. PicGo从剪切板上传：cmd+option+u  
+   从文件夹上传：cmd+option+e  
+   设置的时候文件夹不能是已经有的，需要一个新文件夹名来让PicGo创建，否则会出现“服务端错误”
+2. latex字母上面加字符
+   ```
+   加^号 输入\hat  或 \widehat
+   加横线 输入 \overline
+   加波浪线 输入 \widetilde
+   加一个点 \dot{要加点的字母}加两个点\ddot{要加点的字母}
+   ```
+3. latex集合符号  
+   ```
+   \mathbb{R} or \mathbb R:     ℝ
+   \mathbb{z}:                  ℤ
+   \mathbb{N}:                  ℕ
+   真包含 \subset                ⊂
+   包含 \subseteq                ⊆
+   \supset                      ⊃
+   \in                          ∈
+   \cap                         ∩
+   \cup                         ∪
+   \mid                         ∣
+   \notin                       ∉
+   ```
+4. 公式都是latex语法，那加粗就是
+   <center>\textbf{}</center>
+5. latex正比符号
+   ```
+   \propto
+   ```
